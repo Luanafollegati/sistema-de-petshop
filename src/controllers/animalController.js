@@ -51,3 +51,89 @@ export const listarUm = async (req, res) => {
         })
     }
 }
+
+export const criar = async (req, res) => {
+  try {
+    const { nome, idade, especie, dono } = req.body;
+
+    const dado = req.body;
+
+    const camposObrigatorios = ["nome", "idade", "especie", "dono"];
+
+    const faltando = camposObrigatorios.filter((campo) => !dado[campo]);
+
+    if (faltando.length > 0) {
+      return res.status(400).json({
+        erro: `Os seguintes campos são obrigatórios: ${faltando.join(", ")}.`,
+      });
+    }
+
+   const novoAnimal = await AnimalModel.create(dado);
+
+    res.status(201).json({
+      mensagem: "animal criado com sucesso",
+      animal: novoAnimal,
+    });
+  } catch (error) {
+    res.status(500).json({
+      erro: "Erro ao criar animal",
+      detalhes: error.message,
+    });
+  }
+};
+
+export const apagar = async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+
+        const animalExiste = await AnimalModel.findById(id);
+
+        if (!animalExiste) {
+            return res.status(404).json({
+                erro: 'Animal não encontrado com esse id',
+                id: id
+            })
+        }
+
+        await AnimalModel.deleteAnimal(id)
+
+        res.status(200).json({
+            mensagem: 'Animal removido com sucesso',
+           animalRemovido: animalExiste
+        })
+    } catch (error) {
+        res.status(500).json({
+            erro: 'erro ao apagar Animal',
+            detalhes: error.message
+        })
+    }
+}
+
+export const atualizar = async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        const dados = req.body;
+
+        const animalExiste = await AnimalModel.findById(id);
+
+        if (!animalExiste) {
+            return res.status(404).json({
+                erro: 'Animal não encontrado com esse id',
+                id: id
+            })
+        }
+        
+        const animalAtualizado = await AnimalModel.update(id, dados);
+
+        res.status(200).json({
+            mensagem: 'Animal atualizado com sucesso',
+            Animal: animalAtualizado
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            erro: 'Erro ao atualizar Animais',
+            detalhes: error.message
+        })
+    }
+}
