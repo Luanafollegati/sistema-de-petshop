@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "start": "node server.js"
   },
   "keywords": [
     "animais",
@@ -18,10 +19,18 @@
   "description": "Projeto de backEnd com Prisma de Puppy",
   "dependencies": {
     "@faker-js/faker": "^10.1.0",
-    "@prisma/client": "^6.16.3",
+    "@prisma/client": "^6.18.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",
-    "prisma": "^6.16.3"
-  }
+    "prisma": "^6.18.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luanafollegati/sistema-de-petshop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Luanafollegati/sistema-de-petshop/issues"
+  },
+  "homepage": "https://github.com/Luanafollegati/sistema-de-petshop#readme"
 }
