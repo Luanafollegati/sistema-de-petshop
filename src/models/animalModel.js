@@ -17,7 +17,7 @@ export const findById = async (id) => {
 };
 
 export const create = async (data) => {
-  return await prisma.animal.create({
+  return await prisma.animais.create({
     data: {
       nome: data.nome,
       idade: data.idade,
@@ -29,18 +29,18 @@ export const create = async (data) => {
 };
 
 export const deleteAnimal = async (id) => {
-    return await prisma.animal.delete({
-        where: { id: nunber (id)}
+    return await prisma.animais.delete({
+        where: { id: Number (id)}
     })
 }
 
 export const update = async (id, data) => {
-    return await prisma.bruxo.update({
+    return await prisma.animais.update({
         where: { id: Number(id) },
         data: {
             ...(data.nome && { nome: data.nome }),
             ...(data.dono && { dono: data.dono }),
-            ...(data.especie&& { patrono: data.especie}),
+            ...(data.especie&& { especie: data.especie}),
             ...(data.idade && { idade: data.idade }),
         }
     })
